@@ -11,7 +11,7 @@ app.use("/user",userRouter);
 
 
 mongoose
-.connect(`mongodb+srv://hashadananjaya7:sabara123@carex.sibjgis.mongodb.net/?retryWrites=true&w=majority`
+.connect(`mongodb+srv://admin:1234@cluster0.rgfbnve.mongodb.net/?retryWrites=true&w=majority`
     )
         .then(()=>app.listen(5001,()=>console.log("connect to DB"))
 
