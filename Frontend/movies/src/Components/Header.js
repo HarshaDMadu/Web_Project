@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { 
   AppBar, 
   Autocomplete, 
@@ -10,9 +10,15 @@ import {
 } from "@mui/material";
 import MovieIcon from '@mui/icons-material/Movie';
 import { useState } from 'react';
+import { getAllMovies } from '../api-helpers/API-helpers';
 const dummyArray = ["Flash","Batman","Superman"];
 const Header = () => {
     const [Value, setValue] = useState(0);
+    useEffect (() => {
+      getAllMovies()
+      .then((data)=>console.log(data))
+      .catch((err)=>console.log(err));
+    },[])
   return (
   <AppBar sx={{bgcolor: "#2b2d42"}}>
     <Toolbar>
