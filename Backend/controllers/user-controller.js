@@ -20,7 +20,7 @@ export const getAllUsers = async(req, res, next) => {
 export const signup = async(req, res, next) => {
     const {firstName, lastName, nicNumber, contactNumber, email, street, city, province, password} = req.body;
     if(!firstName && firstName.trim()==="" && !lastName && lastName.trim()==="" && !nicNumber && nicNumber.trim()==="" && !contactNumber && contactNumber.trim()=== "" && !email && email.trim()==="" && !street && street.trim()==="" && !city && city.trim()==="" && !province && province.trim()==="" && !password && password.trim===""){
-        return res.status(422).jason({message: "Invalid Input"});
+        return res.status(422).json({message: "Invalid Input"});
     }
     const hashedPassword = bcrypt.hashSync(password)
     let user;
