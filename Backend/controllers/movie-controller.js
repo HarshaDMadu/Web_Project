@@ -52,3 +52,17 @@ export const addMovie = async(req,res,next) =>{
         return res.status(201).json({movie});
 
 }
+
+export const getAllMovie = async(req,res,next) =>{
+    let movies;
+    try {
+        movies = await Movie.find();    
+    } catch (err) {
+        return console.log(err)
+        
+    }
+    if(!movies){
+        return res.status(500).json({message:"Invalid Request"})
+    }
+    return res.status(200).json({ movies })
+}
