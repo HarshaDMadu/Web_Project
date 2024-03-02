@@ -22,11 +22,13 @@ const movieSchema = mongoose.Schema({
         type:String,
     },
     bookings:
-        [{type:String}],
+        [{type : mongoose.Types.ObjectId,ref: "Bookings"}],
 
     admin:{
-        type: String,
+        type: mongoose.Types.ObjectId,
+        ref:"Movie",
         required:true,
+        
     },
     
 

@@ -1,7 +1,28 @@
+import mongoose from "mongoose";
 import Bookings from "../models/Bookings.js";
+import Movie from "../models/Movie.js";
+import User from "../models/User.js";
+import bookings from "../models/Movie.js"
 
 export const newBooking = async(req,res,next)=>{
     const{movie,date,seatNumber,user} = req.body;
+
+    let existingUser;
+    let existingMovie;
+    try {
+        existingMovie = await Movie.findById(movie);
+        existingUser = await User.findById(user);
+    } catch (err) {
+        return console.log(err);
+    }
+    if(!existingMovie){
+        return res.status(404).json({message:"Movie not found with given ID"});
+    }
+
+    if(!existingUser){
+        return res.status(404).json({message:"User not found with given ID"});
+    }
+    
     let newBooking;
     try {
         newBooking = new Bookings({
@@ -11,7 +32,17 @@ export const newBooking = async(req,res,next)=>{
             user
 
         });
-        newBooking = await newBooking.save();
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    existingUser.booking.push(newBooking);
+    existingMovie.bookings.push(newBooking);
+    await existingUser.save({ session });
+    await existingMovie.save({ session });
+    await newBooking.save({ session });
+    session.commitTransaction();
+    
+
+    
         
     } catch (err) {
         return console.log(err);

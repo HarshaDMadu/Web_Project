@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Movie from "./Movie.js"
 
 const adminSchema = new mongoose.Schema({
     email:{
@@ -10,8 +11,9 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    addedCottages: [{
-        type:String,
+    addedMovies: [{
+        type:mongoose.Types.ObjectId,
+        ref:"Movie"
        
     }]
 })
