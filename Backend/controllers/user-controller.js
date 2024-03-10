@@ -1,6 +1,7 @@
 import { request } from "express";
 import User from "../models/User.js"
 import bcrypt from "bcryptjs";
+import Bookings from "../models/Bookings.js";
 
 export const getAllUsers = async(req, res, next) => {
     let users;
@@ -20,7 +21,7 @@ export const getAllUsers = async(req, res, next) => {
 export const signup = async(req, res, next) => {
     const {firstName, lastName, nicNumber, contactNumber, email, street, city, province, password} = req.body;
     if(!firstName && firstName.trim()==="" && !lastName && lastName.trim()==="" && !nicNumber && nicNumber.trim()==="" && !contactNumber && contactNumber.trim()=== "" && !email && email.trim()==="" && !street && street.trim()==="" && !city && city.trim()==="" && !province && province.trim()==="" && !password && password.trim===""){
-        return res.status(422).jason({message: "Invalid Input"});
+        return res.status(422).json({message: "Invalid Input"});
     }
     const hashedPassword = bcrypt.hashSync(password)
     let user;
@@ -40,3 +41,90 @@ export const signup = async(req, res, next) => {
 }
 
 export default getAllUsers;
+
+export const updateUser = async(req,res,next) => {
+
+    const id = req.params.id;
+    const {firstName, lastName, nicNumber, contactNumber, email, street, city, province, password} = req.body;
+    if(!firstName && firstName.trim()==="" && !lastName && lastName.trim()==="" && !nicNumber && nicNumber.trim()==="" && !contactNumber && contactNumber.trim()=== "" && !email && email.trim()==="" && !street && street.trim()==="" && !city && city.trim()==="" && !province && province.trim()==="" && !password && password.trim===""){
+        return res.status(422).jason({message: "Invalid Input"});
+    }
+
+    const hashedPassword = bcrypt.hashSync(password)
+    let user;
+    try{
+        user = await User.findByIdAndUpdate(id, {
+            firstName, 
+            lastName, 
+            nicNumber, 
+            contactNumber, 
+            email, 
+            street, 
+            city, 
+            province, 
+            password:hashedPassword});
+    } catch(errr){
+       return console.log(errr);
+    }
+    if(!user){
+        return res.status(500).json({ message: "Something went wrong"});
+    }
+    res.status(200).json({ Message:"Update Succesfully"});
+}
+
+export const deleteUser = async(req,res,next)=>{
+    const id = req.params.id;
+    let user;
+    try{
+        user = await User.findByIdAndDelete(id);
+    } catch(err){
+        return console.log(err)
+    }
+    if(!user){
+        return res.status(500).json({ message: "Something went wrong"});
+    }
+     return res.status(200).json({ Message:"Deleted Succesfully"});
+}
+
+export const login = async(req,res,next) =>{
+    const {email,password} = req.body;
+    if( email.trim()==="" && !password && password.trim===""){
+        return res.status(422).jason({message: "Invalid Input"});
+    }
+
+    let existingUser;
+    try{
+        existingUser = await User.findOne({email})
+    } catch(err){
+        return console.log(err);
+    }
+    if(!existingUser){
+        return res.status(404).message({message:"Unable to find User from This ID"});
+    }
+    const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
+
+    if(!isPasswordCorrect){
+        return res.status(400).json({message:"Password Incorrect"});
+    }
+
+    return res.status(200).json({message:"Login Successfull"});
+}
+
+export const getBookingsOfUser = async(req,res,next) => {
+    let bookings;
+
+    const id = req.params.id;
+   try {
+    bookings = await Bookings.find({user: id});
+   } catch (err) {
+        return res.status(500).json({message:"Unable to get bookings"});
+   }
+
+   if(!bookings){
+    return res.status(500).json({message:"No bookings"});
+   }
+
+   return res.status(200).json({ bookings });
+
+    
+}

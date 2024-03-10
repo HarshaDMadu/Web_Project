@@ -44,7 +44,11 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+    booking:[{
+        type:mongoose.Types.ObjectId,
+        ref: "Bookings"
+    }]
 });
 
 export default mongoose.model("User",userSchema);
