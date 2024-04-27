@@ -15,21 +15,25 @@ const Header = () => {
   const [Movies, setMovies] = useState([]);
   useEffect(() => {
     getAllMovies()
-      .then((data) => setMovies(data.Movies))
+      .then((data) => setMovies(data.movies))
       .catch((err) => console.log(err));
-  }, []); 
-  
+
+    // console.log(data);
+  }, []);
+
   return (
     <AppBar position="Sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
         <Box width={"20%"}>
-          <Link to="/"><MovieIcon style={{color:"white"}}/></Link>
+          <Link to="/">
+            <MovieIcon style={{ color: "white" }} />
+          </Link>
         </Box>
         <Box width={"30%"} margin={"auto"}>
           <Autocomplete
             id="free-solo-demo"
             freeSolo
-                options={Movies && Movies.map((option) => option.title)}
+            options={Movies && Movies.map((option) => option.title)}
             renderInput={(params) => (
               <TextField
                 sx={{ input: { color: "white" } }}
@@ -48,7 +52,7 @@ const Header = () => {
             value={Value}
             onChange={(e, val) => setValue(val)}
           >
-            <Tab LinkComponent={Link} to="/Movies" label="Movies" /> 
+            <Tab LinkComponent={Link} to="/Movies" label="Movies" />
             <Tab LinkComponent={Link} to="/Admin" label="Admin" />
             <Tab LinkComponent={Link} to="/Auth" label="Auth" />
           </Tabs>

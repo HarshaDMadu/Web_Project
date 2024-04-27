@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-const MovieItems = () => {
+const MovieItems = ({ title, releaseDate, posterUrl, id }) => {
   return (
     <Card
       sx={{
@@ -19,7 +19,7 @@ const MovieItems = () => {
         },
       }}
     >
-      <img height={"50%"} width={"100%"} src="" alt="" />
+      <img height={"50%"} width={"100%"} src={""} alt="" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           Lizard

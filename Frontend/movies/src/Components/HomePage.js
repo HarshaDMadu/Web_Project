@@ -31,11 +31,21 @@ const HomePage = () => {
         ))}
       </Box>
       <Box display={"flex"} padding={5} margin="auto" justifyContent={"center"}>
-        <button
+        {/* <button
           LinkComponent={Link}
           to="/Movies"
           variant="outlined"
           sx={{ margin: "auto", color: "#2b2d42" }}
+        >
+          View All Movies
+        </button> */}
+
+        <button
+          onClick={() => {
+            window.location.href = "/Movies";
+          }}
+          variant="outlined"
+          style={{ margin: "auto", color: "#2b2d42", textDecoration: "none" }}
         >
           View All Movies
         </button>
