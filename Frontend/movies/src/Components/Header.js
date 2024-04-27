@@ -23,7 +23,7 @@ const Header = () => {
     <AppBar position="Sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
         <Box width={"20%"}>
-          <MovieIcon />
+          <Link to="/"><MovieIcon style={{color:"white"}}/></Link>
         </Box>
         <Box width={"30%"} margin={"auto"}>
           <Autocomplete
