@@ -9,5 +9,6 @@ export const getAllMovies = async () => {
   }
 
   const data = await res.data;
+  console.log(data);
   return data;
 };
