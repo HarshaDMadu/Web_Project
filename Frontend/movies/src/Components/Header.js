@@ -22,7 +22,7 @@ const Header = () => {
   }, []);
 
   return (
-    <AppBar position="Sticky" sx={{ bgcolor: "#2b2d42" }}>
+    <AppBar position="sticky" sx={{ bgcolor: "#2b2d42" }}>
       <Toolbar>
         <Box width={"20%"}>
           <Link to="/">

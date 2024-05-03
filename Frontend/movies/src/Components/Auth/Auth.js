@@ -1,12 +1,18 @@
-import React from 'react'
+import React from "react";
+import AuthForm from "./AuthForm";
+import { sendUserAuthRequest } from "../../api-helpers/API-helpers";
 
 const Auth = () => {
+  const getData = (data) => {
+    console.log(data);
+    sendUserAuthRequest(data.inputs, data.signup)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   return (
-    <div>Auth
-      <h1>Auth</h1><br />
-      <h1>Auth</h1>
+    <div>
+      <AuthForm onSubmit={getData} isAdmin={false} />
     </div>
   );
 };
-
 export default Auth;

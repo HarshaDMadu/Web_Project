@@ -1,12 +1,14 @@
-import React from 'react'
+import React from "react";
+import AuthForm from "../Auth/AuthForm";
 
 const Admin = () => {
+  const getData = (data) => {
+    console.log("Admin", data);
+  };
   return (
-    <div>Admin
-    <h1>Admin</h1><br />
-      <h1>Admin</h1>
+    <div>
+      <AuthForm onSubmit={getData} isAdmin={true} />
     </div>
   );
 };
-
 export default Admin;

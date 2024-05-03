@@ -2,53 +2,24 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 const userSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true,
-        
-    },
-    lastName: {
-        type: String,
-        required: true,
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
 
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
+  booking: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Bookings",
     },
-    nicNumber: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    contactNumber: {
-        type: String,
-        required: true,
-
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-
-    },
-    street: {
-        type: String,
-        required: true,
-    },
-    city: {
-        type: String,
-        required: true,
-    },
-    province: {
-        type: String,
-        required: true,
-
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    booking:[{
-        type:mongoose.Types.ObjectId,
-        ref: "Bookings"
-    }]
+  ],
 });
 
-export default mongoose.model("User",userSchema);
+export default mongoose.model("User", userSchema);
