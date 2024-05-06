@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import MovieItems from "./Movies/MovieItems";
 import { Link } from "react-router-dom";
 import { getAllMovies } from "../api-helpers/API-helpers";
+import godzilla from "../Assests/godzilla.jpg";
 const HomePage = () => {
   const [Movies, setMovies] = useState([]);
   useEffect(() => {
@@ -14,12 +15,7 @@ const HomePage = () => {
   return (
     <Box width={"100%"} height={"100%"} margin={"auto"} marginTop={2}>
       <Box width={"90%"} height={"40vh"} margin={"auto"} padding={2}>
-        <img
-          src="http://www.impawards.com/2021/posters/godzilla_vs_kong_ver19_xlg.jpg"
-          alt="Kong"
-          width={"100%"}
-          height={"100%"}
-        />
+        <img src={godzilla} alt="Kong" width={"100%"} height={"100%"} />
       </Box>
       <Box padding={5} margin={"auto"}>
         <Typography variant="h4" textAlign={"center"}>
