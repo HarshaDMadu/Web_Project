@@ -2,7 +2,7 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: { isLoggedIn: true },
+  initialState: { isLoggedIn: false },
   reducers: {
     login(state) {
       state.isLoggedIn = true;
@@ -15,7 +15,7 @@ const userSlice = createSlice({
 
 const adminSlice = createSlice({
   name: "Auth",
-  initialState: { isLoggedIn: true },
+  initialState: { isLoggedIn: false },
   reducers: {
     login(state) {
       state.isLoggedIn = true;

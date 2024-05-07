@@ -114,7 +114,7 @@ export const deleteUser = async (req, res, next) => {
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
   if (email.trim() === "" && !password && password.trim === "") {
-    return res.status(422).jason({ message: "Invalid Input" });
+    return res.status(422).json({ message: "Invalid Input" }); // jason
   }
 
   let existingUser;
@@ -134,7 +134,9 @@ export const login = async (req, res, next) => {
     return res.status(400).json({ message: "Password Incorrect" });
   }
 
-  return res.status(200).json({ message: "Login Successfull" });
+  return res
+    .status(200)
+    .json({ message: "Login Successfull", id: existingUser._id });
 };
 
 export const getBookingsOfUser = async (req, res, next) => {
