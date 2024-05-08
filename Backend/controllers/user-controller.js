@@ -136,7 +136,7 @@ export const login = async (req, res, next) => {
 
   return res
     .status(200)
-    .json({ message: "Login Successfull", id: existingUser._id });
+    .json({ message: "Login Successfull", id: existingUser._id }); //id passed
 };
 
 export const getBookingsOfUser = async (req, res, next) => {
