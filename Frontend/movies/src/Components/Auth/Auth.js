@@ -1,12 +1,27 @@
-import React from 'react'
+import React from "react";
+import AuthForm from "./AuthForm";
+import { sendUserAuthRequest } from "../../api-helpers/API-helpers";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store";
 
 const Auth = () => {
+  const dispatch = useDispatch();
+  const onResReceived = (data) => {
+    console.log(data);
+    dispatch(userActions.login());
+    localStorage.setItem("userId", data.id);
+  };
+
+  const getData = (data) => {
+    console.log(data);
+    sendUserAuthRequest(data.inputs, data.signup)
+      .then(onResReceived)
+      .catch((err) => console.log(err));
+  };
   return (
-    <div>Auth
-      <h1>Auth</h1><br />
-      <h1>Auth</h1>
+    <div>
+      <AuthForm onSubmit={getData} isAdmin={false} />
     </div>
   );
 };
-
 export default Auth;
