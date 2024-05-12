@@ -25,15 +25,22 @@ const Movies = () => {
       </Typography>
 
       <Box
-        display={"flex"}
-        justifyContent={"center"}
-        flexWrap={"wrap"}
+        // display={"flex"}
+        // justifyContent={"center"}
+        // flexWrap={"wrap"}
+        // margin={"auto"}
+        width={"100%"}
         margin={"auto"}
+        marginLeft={7}
+        marginTop={5}
+        display={"flex"}
+        justifyContent={"flex-start"}
+        flexWrap={"wrap"}
       >
         {Movies &&
           Movies.map((movie, index) => (
             <MovieItems
-              id={movie.id}
+              id={movie._id}
               title={movie.title}
               posterUrl={movie.posterUrl}
               releaseDate={movie.releaseDate}
