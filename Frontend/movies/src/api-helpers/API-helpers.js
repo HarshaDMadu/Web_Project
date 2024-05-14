@@ -83,5 +83,6 @@ export const getUserBooking = async () => {
     return console.log("Unexpected Error");
   }
   const resData = await res.data;
+  console.log(resData);
   return resData;
 };

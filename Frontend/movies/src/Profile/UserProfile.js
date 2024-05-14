@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { getUserBooking } from "../api-helpers/API-helpers";
+import { Box, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const UserProfile = () => {
   const [bookings, setBookings] = useState();
@@ -9,7 +11,43 @@ const UserProfile = () => {
       .catch((err) => console.log(err));
   }, []);
   console.log(bookings);
-  return <div>UserProfile</div>;
+  return (
+    <Box width={"100%"} display="flex">
+      {bookings && bookings.length > 0 && (
+        <Fragment>
+          {" "}
+          <Box
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            width={"30%"}
+          >
+            <AccountCircleIcon
+              sx={{ fontSize: "20rem", textAlign: "center", ml: 3 }}
+            />
+            <Typography
+              padding={1}
+              width={"auto"}
+              textAlign={"center"}
+              border={"1px solid #ccc"}
+              borderRadius={6}
+            >
+              Name: {bookings[0].user.name}
+            </Typography>
+            <Typography
+              padding={1}
+              width={"auto"}
+              textAlign={"center"}
+              border={"1px solid #ccc"}
+              borderRadius={6}
+            >
+              Email: {bookings[0].user.email}
+            </Typography>
+          </Box>
+        </Fragment>
+      )}
+    </Box>
+  );
 };
 
 export default UserProfile;
