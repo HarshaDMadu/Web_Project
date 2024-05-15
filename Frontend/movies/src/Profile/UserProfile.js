@@ -1,5 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { getUserBooking } from "../api-helpers/API-helpers";
+import {
+  deleteBooking,
+  getUserBooking,
+  getUserDetails,
+} from "../api-helpers/API-helpers";
 import {
   Box,
   IconButton,
@@ -13,18 +17,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const UserProfile = () => {
   const [bookings, setBookings] = useState();
+  const [user, setUser] = useState();
   useEffect(() => {
     getUserBooking()
       .then((res) => setBookings(res.bookings))
       .catch((err) => console.log(err));
+
+    getUserDetails()
+      .then((res) => setUser(res.user))
+      .catch((err) => console.log(err));
   }, []);
-  console.log("data");
-  console.log(bookings);
+  const handleDelete = (id) => {
+    deleteBooking(id)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   return (
     <Box width={"100%"} display="flex">
-      {bookings && bookings.length > 0 && (
-        <Fragment>
-          {" "}
+      <Fragment>
+        {" "}
+        {user && (
           <Box
             flexDirection={"column"}
             justifyContent={"center"}
@@ -42,7 +54,7 @@ const UserProfile = () => {
               borderRadius={6}
               marginLeft={3}
             >
-              Name: {bookings[0].user.name}
+              Name: {user.name}
             </Typography>
             <Typography
               padding={1}
@@ -52,9 +64,11 @@ const UserProfile = () => {
               borderRadius={6}
               marginLeft={3}
             >
-              Email: {bookings[0].user.email}
+              Email: {user.email}
             </Typography>
           </Box>
+        )}
+        {bookings && bookings.length > 0 && (
           <Box width={"70%"} display={"flex"} flexDirection={"column"}>
             <Typography
               variant="h3"
@@ -95,7 +109,10 @@ const UserProfile = () => {
                     >
                       Date: {new Date(booking.date).toDateString()}
                     </ListItemText>
-                    <IconButton color="error">
+                    <IconButton
+                      onClick={() => handleDelete(booking._id)}
+                      color="error"
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </ListItem>
@@ -103,8 +120,8 @@ const UserProfile = () => {
               </List>
             </Box>
           </Box>
-        </Fragment>
-      )}
+        )}
+      </Fragment>
     </Box>
   );
 };
