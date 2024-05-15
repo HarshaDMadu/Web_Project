@@ -144,7 +144,9 @@ export const getBookingsOfUser = async (req, res, next) => {
 
   const id = req.params.id;
   try {
-    bookings = await Bookings.find({ user: id }).populate("user");
+    bookings = await Bookings.find({ user: id })
+      .populate("user")
+      .populate("movie");
   } catch (err) {
     return res.status(500).json({ message: "Unable to get bookings" });
   }
