@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
+import { addMovie } from "../../api-helpers/API-helpers";
 
 const labelProps = {
   mt: 1,
@@ -33,6 +34,9 @@ const AddMovie = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(inputs, actors);
+    addMovie({ ...inputs, actors })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <div>
@@ -84,7 +88,7 @@ const AddMovie = () => {
           <FormLabel sx={{ labelProps }}>Actors</FormLabel>{" "}
           <Box display={"flex"}>
             <TextField
-              value={inputs.actor}
+              value={actor}
               onChange={(e) => setActor(e.target.value)}
               name="actor"
               variant="standard"
