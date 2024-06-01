@@ -7,15 +7,36 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useState } from "react";
+
 const labelProps = {
   mt: 1,
   mb: 1,
 };
 
 const AddMovie = () => {
+  const [inputs, setInputs] = useState({
+    title: "",
+    description: "",
+    posterUrl: "",
+    releaseDate: "",
+    featured: false,
+  });
+  const [actors, setActors] = useState([]);
+  const [actor, setActor] = useState("");
+  const handleChange = (e) => {
+    setInputs((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(inputs, actors);
+  };
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Box
           width={"50%"}
           padding={10}
@@ -28,22 +49,71 @@ const AddMovie = () => {
             Add New Movie
           </Typography>
           <FormLabel sx={{ labelProps }}>Title</FormLabel>{" "}
-          <TextField name="title" variant="standard" margin="normal" />
+          <TextField
+            value={inputs.title}
+            onChange={handleChange}
+            name="title"
+            variant="standard"
+            margin="normal"
+          />
           <FormLabel sx={{ labelProps }}>Description</FormLabel>{" "}
-          <TextField name="description" variant="standard" margin="normal" />
+          <TextField
+            value={inputs.description}
+            onChange={handleChange}
+            name="description"
+            variant="standard"
+            margin="normal"
+          />
           <FormLabel sx={{ labelProps }}>Poster URL</FormLabel>{" "}
-          <TextField name="posterUrl" variant="standard" margin="normal" />
+          <TextField
+            value={inputs.posterUrl}
+            onChange={handleChange}
+            name="posterUrl"
+            variant="standard"
+            margin="normal"
+          />
           <FormLabel sx={{ labelProps }}>Release Date</FormLabel>{" "}
-          <TextField name="releaseDate" variant="standard" margin="normal" />
+          <TextField
+            value={inputs.releaseDate}
+            onChange={handleChange}
+            name="releaseDate"
+            variant="standard"
+            type="date"
+            margin="normal"
+          />
           <FormLabel sx={{ labelProps }}>Actors</FormLabel>{" "}
           <Box display={"flex"}>
-            <TextField name="actor" variant="standard" margin="normal" />
-            <Button>Add</Button>
+            <TextField
+              value={inputs.actor}
+              onChange={(e) => setActor(e.target.value)}
+              name="actor"
+              variant="standard"
+              margin="normal"
+            />
+            <Button
+              onClick={() => {
+                setActors([...actors, actor]);
+                setActor("");
+              }}
+            >
+              Add
+            </Button>
           </Box>
           <FormLabel> Featured</FormLabel>
-          <Checkbox sx={{ mr: "auto" }} />
+          <Checkbox
+            name="featured"
+            checked={inputs.featured}
+            onClick={(e) =>
+              setInputs((prevState) => ({
+                ...prevState,
+                featured: e.target.checked,
+              }))
+            }
+            sx={{ mr: "auto" }}
+          />
           <Button
             variant="contained"
+            type="submit"
             sx={{
               width: "30%",
               margin: "auto",
