@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import Movies from "./Components/Movies/Movies";
-import Admin from "./Components/Admin/Admin";
+import Admin from "./Components/Auth/Admin";
 import HomePage from "./Components/HomePage";
 import Auth from "./Components/Auth/Auth";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
