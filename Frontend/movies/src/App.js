@@ -10,6 +10,7 @@ import { adminActions, userActions } from "./store";
 import Booking from "./Components/Bookings/Booking";
 import UserProfile from "./Profile/UserProfile";
 import AddMovie from "./Components/Movies/AddMovie";
+import AdminProfile from "./Profile/AdminProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
           <Route path="/User" element={<UserProfile />} />
           <Route path="/Booking/:id" element={<Booking />} />
           <Route path="/add" element={<AddMovie />} />
+          <Route path="/user-admin" element={<AdminProfile />} />
         </Routes>
       </section>
     </div>
