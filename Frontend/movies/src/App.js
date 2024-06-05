@@ -33,12 +33,25 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Movies" element={<Movies />} />
-          <Route path="/Admin" element={<Admin />} />
-          <Route path="/Auth" element={<Auth />} />
-          <Route path="/User" element={<UserProfile />} />
-          <Route path="/Booking/:id" element={<Booking />} />
-          <Route path="/add" element={<AddMovie />} />
-          <Route path="/user-admin" element={<AdminProfile />} />
+          {!isUserLoggedIn && !isAdminLoggedIn && (
+            <>
+              <Route path="/Admin" element={<Admin />} />
+              <Route path="/Auth" element={<Auth />} />
+            </>
+          )}
+          {isUserLoggedIn && !isAdminLoggedIn && (
+            <>
+              <Route path="/User" element={<UserProfile />} />
+              <Route path="/Booking/:id" element={<Booking />} />
+            </>
+          )}
+          {!isUserLoggedIn && isAdminLoggedIn && (
+            <>
+              {" "}
+              <Route path="/add" element={<AddMovie />} />
+              <Route path="/user-admin" element={<AdminProfile />} />
+            </>
+          )}
         </Routes>
       </section>
     </div>
