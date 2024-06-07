@@ -7,7 +7,7 @@ const AdminProfile = () => {
   const [admin, setAdmin] = useState();
   useEffect(() => {
     getAdminById()
-      .then((res) => setAdmin(res.admin))
+      .then((res) => setAdmin(res.admins))
       .catch((err) => console.log(err));
   }, []);
 

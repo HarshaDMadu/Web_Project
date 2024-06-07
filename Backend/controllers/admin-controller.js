@@ -69,8 +69,9 @@ export const adminLogin = async (req, res, next) => {
 
 export const getAdmins = async (req, res, next) => {
   let admins;
+  const id = req.params.id;
   try {
-    admins = await Admin.find();
+    admins = await Admin.findById(id).populate("addedMovies");
   } catch (err) {
     return console.log(err);
   }
