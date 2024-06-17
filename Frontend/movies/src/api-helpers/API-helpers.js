@@ -72,3 +72,84 @@ export const newBooking = async (data) => {
   // console.log(resData);
   return resData;
 };
+
+export const getUserBooking = async () => {
+  const id = localStorage.getItem("userId");
+  const res = await axios
+    .get(`/User/Bookings/${id}`)
+    .catch((err) => console.log(err));
+
+  if (res.status !== 200) {
+    return console.log("Unexpected Error");
+  }
+  const resData = await res.data;
+  console.log(resData);
+  return resData;
+};
+
+export const deleteBooking = async (id) => {
+  const res = await axios
+    .delete(`/booking/${id}`)
+    .catch((err) => console.log(err));
+  if (res.status !== 200) {
+    return console.log("Unexpected Error");
+  }
+  const resData = await res.data;
+  console.log(resData);
+  return resData;
+};
+
+export const getUserDetails = async () => {
+  const id = localStorage.getItem("userId");
+  const res = await axios.get(`/user/${id}`).catch((err) => console.log(err));
+  if (res.status !== 200) {
+    return console.log("Unexpected Error");
+  }
+  const resData = await res.data;
+  console.log(resData);
+  return resData;
+};
+
+export const addMovie = async (data) => {
+  const res = await axios
+    .post(
+      "/movie",
+      {
+        title: data.title,
+        description: data.description,
+        releaseDate: data.releaseDate,
+        posterUrl: data.posterUrl,
+        featured: data.featured,
+        actors: data.actors,
+        admin: localStorage.getItem("adminId"),
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    )
+    .catch((err) => console.log(err));
+  if (res.status !== 201) {
+    return console.log("Unexpected Error");
+  }
+  const resData = await res.data;
+
+  return resData;
+};
+
+export const getAdminById = async () => {
+  const adminId = localStorage.getItem("adminId");
+  // console.log(adminId);
+  const res = await axios
+    .get(`/admin/${adminId}`)
+    .catch((err) => console.log(err));
+
+  if (res.status !== 200) {
+    return console.log("Unexpected Error");
+  }
+  const resData = await res.data;
+  console.log(resData);
+
+  return resData;
+};
